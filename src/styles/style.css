@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'icons';
+    src: url('../../public/fonts/icons.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+  
+[class^="_icon-"], [class*=" _icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icons' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ._icon-arrow-down-indicator:before {
+    content: "\e900";
+  }
+  ._icon-dashboard:before {
+    content: "\e901";
+  }
+  ._icon-features:before {
+    content: "\e902";
+  }
+  ._icon-integrations:before {
+    content: "\e903";
+  }
+  ._icon-pricing:before {
+    content: "\e904";
+  }
+  ._icon-settings:before {
+    content: "\e905";
+  }
+  ._icon-template-pages:before {
+    content: "\e906";
+  }
+  ._icon-users:before {
+    content: "\e907";
+  }
+  ._icon-undo-menu:before {
+    content: "\e967";
+  }
+  ._icon-menu:before {
+    content: "\e9bd";
+  }
+  ._icon-arrow-up-right:before {
+    content: "\ea3b";
+  }
+  ._icon-arrow-right:before {
+    content: "\ea3c";
+  }
+  ._icon-arrow-down-right:before {
+    content: "\ea3d";
+  }
+  ._icon-arrow-down:before {
+    content: "\ea3e";
+  }
+
+@theme {
+    --color-mainDark: #081028;
+    --color-secondaryDark: #0B1739;
+    --color-mainLight: #AEB9E1;
+    --color-customViolet: #CB3CFF;
+    --color-customBlue: #0E43FB;
+    --color-customCyan: #00C2FF;
+    --text-s: 10px;
+}
+
+body {
+    font-family: 'Mona Sans', sans-serif; 
+}
+
+hr {
+    height: 1px;
+}
+
+@layer utilities {
+    .info-up {
+        @apply text-s bg-[#05C168]/20 text-[#14CA74] p-0.5 border-[#14ca7534] border rounded-sm relative pr-5;
+    }
+
+    .info-up::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+        @apply bg-cover bg-center bg-no-repeat;
+        background-image: url('../../public/images/arrow-up.svg');
+    }
+
+    .info-down {
+        @apply text-s bg-[#FF5A65]/20 text-[#FF5A65] p-0.5 border-[#ff5a654c] border rounded-sm relative pr-5;
+    }
+
+    .info-down::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+        @apply bg-cover bg-center bg-no-repeat;
+        background-image: url('../../public/images/arrow-down.svg');
+    }
+
+    .images-contain {
+        @apply w-full h-full object-contain;
+    }
+
+    .delivered {
+        @apply w-fit text-s bg-[#05C168]/20 text-[#14CA74] p-0.5 border-[#14ca7534] border rounded-sm relative before:content-['•'] before:absolute before:left-1.5 pl-3.5 px-2;
+    }
+
+    .canceled {
+        @apply w-fit text-s bg-[#FF5A65]/20 text-[#FF5A65] p-0.5 border-[#ff5a654c] border rounded-sm relative before:content-['•'] before:absolute before:left-1.5 pl-3.5 px-2;
+    }
+
+    .pending {
+        @apply w-fit text-s bg-[#FFB016]/20 text-[#FDB52A] p-0.5 border-[#fdb72a5a] border rounded-sm relative before:content-['•'] before:absolute before:left-1.5 pl-3.5 px-2;
+    }
+
+    .order-list > div:nth-child(even) {
+        @apply bg-[#0A1330];
+    }
+
+    .order-list__item {
+        @apply grid grid-cols-[repeat(6,1fr)_40px] px-8 text-s py-4 items-center gap-3;
+    }
+
+    .mobile-order-list__item {
+        @apply bg-secondaryDark p-3 rounded-lg flex flex-col gap-3 text-xs shadow-2xl;
+    }
+
+    .sidebar {
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;
+    }
+
+    .sidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar-item {
+        @apply flex gap-1.5 items-center rounded-sm text-mainLight hover:text-customViolet py-3.5 pr-4;
+    }
+
+    .icon-menu-right-arrow {
+        background: url('../../public/images/menu-right-arrow.svg') center center / contain no-repeat;
+        width: 6px;
+        height: 10px;
+    }
+
+    .menu-item--active {
+        @apply shadow-[0_4px_4px_0px_#00000040] text-customViolet;
+    }
+
+    .menu-item--active .icon-menu-right-arrow {
+        @apply transition-all duration-300 transform rotate-90;
+    }
+
+    .submenu-item {
+        @apply flex gap-1.5 items-center rounded-sm text-mainLight py-3.5 pl-4 transition-all duration-300 hover:text-white;
+        &:hover {
+            background: linear-gradient(to right, #CB3CFF 3px,#0A1330 3px);
+        }
+    }
+
+    .submenu-item--active {
+        @apply text-white;
+        background: linear-gradient(to right, #CB3CFF 3px,#0A1330 3px);
+    }
+
+    .gradient-btn {
+        @apply py-3 flex justify-center gap-2 rounded-sm;
+        background: linear-gradient(128.49deg, #CB3CFF 19.86%, #7F25FB 68.34%);
+    }
+
+    input.search-inp {
+        position: relative;
+        @apply bg-secondaryDark text-mainLight text-xs w-full p-3.5 mt-7 rounded-lg outline-0;
+    }
+      
+    input.search-inp::before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        z-index: 1000;
+        transform: translateY(-50%);
+        left: 12px; /* Регулируйте это значение, чтобы иконка не выходила за пределы поля ввода */
+        border: 1px solid #E0E0E0; /* Цвет рамки */
+        background-image: url('../../public/images/search.svg'); /* Убедитесь, что путь правильный */
+        background-size: contain; /* Или cover в зависимости от размеров иконки */
+    }
+
+    .violet-btn {
+        @apply bg-customViolet py-1 px-2 rounded-sm text-white flex gap-1.5 items-center text-s cursor-pointer sm:px-4 sm:py-2;
+    }
+
+}
+
